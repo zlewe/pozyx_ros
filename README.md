@@ -17,3 +17,5 @@ install the pypozyx package:
 launch pozyx node:
 
     roslaunch pozyx_ros pozyx_node.launch
+
+A PoseStamped message will then published to /pozyx_node/pozyx_pose
