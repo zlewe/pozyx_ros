@@ -14,6 +14,8 @@ install the pypozyx package:
   
     sudo pip install pypozyx
     
+    sudo pip install requests
+    
 launch pozyx node:
 
     roslaunch pozyx_ros pozyx_node.launch
