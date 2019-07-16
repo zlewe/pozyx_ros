@@ -14,10 +14,8 @@ class pozyx_node(object):
         super(pozyx_node, self).__init__()
 
         self.anchors = rospy.get_param("~anchors")
-        # print self.anchors
+        print self.anchors
         self.pub_poses = rospy.Publisher('~pozyx_pose', PoseStamped, queue_size=1)
-        
-        self.sample_rate = 15 # Hz
 
         self.pozyx = PozyxSerial(get_first_pozyx_serial_port())
         self.pozyx.printDeviceInfo()
@@ -29,20 +27,19 @@ class pozyx_node(object):
         for anchor in self.anchors:
             status &= self.pozyx.addDevice(DeviceCoordinates(anchor['anchor_id'], 1, Coordinates(anchor['px'], anchor['py'], anchor['pz'])))
         if len(self.anchors) > 4:
-            status &= self.pozyx.setSelectionOfAnchors(PozyxConstants.ANCHOR_SELECT_AUTO, len(anchors))
+            status &= self.pozyx.setSelectionOfAnchors(PozyxConstants.ANCHOR_SELECT_AUTO, len(self.anchors))
         if status == POZYX_SUCCESS:
             self.pozyx.printDeviceList()
         else:
             self.printErrorCode()
 
     def do_positioning(self):
-        rate = rospy.Rate(self.sample_rate)
 
         while not rospy.is_shutdown():
             position = Coordinates()
             orientation = EulerAngles()
-            status = self.pozyx.doPositioning(position, dimension=PozyxConstants.DIMENSION_3D, algorithm=PozyxConstants.POSITIONING_ALGORITHM_TRACKING)
-            status &= self.pozyx.getEulerAngles_deg(orientation)
+            status = self.pozyx.doPositioning(position, dimension=PozyxConstants.DIMENSION_3D, algorithm=PozyxConstants.POSITIONING_ALGORITHM_TRACKING, remote_id = None)
+            status &= self.pozyx.getEulerAngles_deg(orientation, remote_id = None)
 
             if status == POZYX_SUCCESS: # if get pose from pozyx
                 #print "X:", position.x, ", Y:", position.y, "Z:", position.z
@@ -63,8 +60,6 @@ class pozyx_node(object):
 
             else:
                 self.printErrorCode()
-
-            rate.sleep()
 
     def printErrorCode(self):
         error_code = SingleRegister()
