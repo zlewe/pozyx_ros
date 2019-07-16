@@ -12,9 +12,7 @@ https://github.com/pozyxLabs/Pozyx-Python-library
 
 install the pypozyx package:
   
-    sudo pip install pypozyx
-    
-    sudo pip install requests
+    sudo pip install pypozyx requests
     
 launch pozyx node:
 
