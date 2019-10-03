@@ -7,8 +7,8 @@ from geometry_msgs.msg import PoseStamped
 class visualizer(object):
     def __init__(self):
 	self.hostname = socket.gethostname()
-        self.pub_marker = rospy.Publisher("~"+hostname+"/pose_visualizer", Marker, queue_size=1)
-        self.sub_pose = rospy.Subscriber("/pozyx_node"+hostname+"/pozyx_pose", PoseStamped, self.pose_cb, queue_size=1)
+        self.pub_marker = rospy.Publisher(hostname+rospy.get_name()+"/pose_visualizer", Marker, queue_size=1)
+        self.sub_pose = rospy.Subscriber(hostname+rospy.get_name()+"/pozyx_pose", PoseStamped, self.pose_cb, queue_size=1)
     def pose_cb(self, pose_msg):
         #print "pose cb"
         marker_msg = Marker()
