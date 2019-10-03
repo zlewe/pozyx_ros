@@ -51,7 +51,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
-#   Message1.msg
+#   StringArray.msg
 #   Message2.msg
 # )
 
@@ -70,10 +70,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
+#generate_messages(
 #   DEPENDENCIES
-#   geometry_msgs#   sensor_msgs#   std_msgs
-# )
+#   geometry_msgs#   sensor_msgs#   
+#   std_msgs
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -104,12 +105,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
+#catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES pozyx_ros
-#  CATKIN_DEPENDS geometry_msgs roscpp rospy sensor_msgs std_msgs
-#  DEPENDS system_lib
-)
+#  CATKIN_DEPENDS message_runtime
+#  geometry_msgs roscpp rospy sensor_msgs std_msgs
+#  DEPENDS
+#)
 
 ###########
 ## Build ##

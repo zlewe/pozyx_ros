@@ -20,11 +20,11 @@ anchors: #x, y, z are measured in mm
         px: 10000
         py: 7000
         pz: 2500
-    -
-        anchor_id: 0x6754
-        px: 5000
-        py: 1000
-        pz: 3200
+#    -
+#        anchor_id: 0x6754
+#        px: 5000
+#        py: 1000
+#        pz: 3200
     -
         anchor_id: 0x6713
         px: 10000
